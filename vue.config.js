@@ -13,7 +13,7 @@ const { defineConfig } = require('@vue/cli-service');
 
 const config = defineConfig({
   // babel loader를 사용하여 설치된 pacakge 내의 소스를 변환할지에 대한 여부
-  transpileDependencies: true,
+  transpileDependencies: ['vuetify'],
   // Public Path, 빌드된 html 파일 내의 src 경로 확인 (like contextRoot)
   publicPath,
   // 빌드 경로
