@@ -54,3 +54,24 @@ new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 ```
+
+### @mdi/font 적용
+
+[Icon Search and Install](https://vuetifyjs.com/en/features/icon-fonts/#material-design-icons)
+
+`public/index.html`
+
+```html
+<!-- append head 태그 -->
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet" />
+```
+
+`plugins/vuetify.js`
+
+```js
+export default new Vuetify({
+  icons: {
+    iconfont: 'mdi', // default - only for display purposes
+  },
+});
+```
