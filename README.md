@@ -27,8 +27,14 @@ module.exports = defineConfig({
 
 ```html
 <!-- head 태그 내 append -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
+/>
 ```
 
 `plugins/vuetify.js`
@@ -63,7 +69,10 @@ new Vue({
 
 ```html
 <!-- append head 태그 -->
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet" />
+<link
+  href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+  rel="stylesheet"
+/>
 ```
 
 `plugins/vuetify.js`

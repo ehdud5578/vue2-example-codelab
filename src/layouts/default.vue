@@ -1,11 +1,23 @@
 <template>
-  <div>
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" :key="$route.fullpath"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" :key="$route.fullpath"></router-view>
-  </div>
+  <v-app>
+    <app-navigator />
+    <app-header />
+    <!-- Sizes your content based upon application components -->
+    <v-main>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive" :key="$route.fullpath"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive" :key="$route.fullpath"></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 <script>
-export default {};
+import AppNavigator from '@/components/AppNavigator.vue';
+import AppHeader from '@/components/AppHeader.vue';
+export default {
+  components: { AppNavigator, AppHeader },
+};
 </script>
