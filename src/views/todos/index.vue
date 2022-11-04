@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-0">
+  <v-container class="pa-0">
     <v-row>
       <v-col cols="12">
         <v-card elevation="12" outlined shaped>
@@ -24,7 +24,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-content>
+  </v-container>
 </template>
 
 <script>

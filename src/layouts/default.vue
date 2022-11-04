@@ -5,12 +5,10 @@
     <!-- Sizes your content based upon application components -->
     <v-main>
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
-        <keep-alive>
-          <router-view v-if="$route.meta.keepAlive" :key="$route.fullpath"></router-view>
-        </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive" :key="$route.fullpath"></router-view>
-      </v-container>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" :key="$route.fullpath"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" :key="$route.fullpath"></router-view>
     </v-main>
   </v-app>
 </template>

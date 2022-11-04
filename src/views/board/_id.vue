@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-4">
+  <v-container class="pa-4">
     <v-sheet>
       <v-row dense>
         <v-col cols="3" class="font-weight-medium">제목</v-col>
@@ -16,7 +16,7 @@
         </v-col>
       </v-row>
     </v-sheet>
-  </v-content>
+  </v-container>
 </template>
 
 <script>

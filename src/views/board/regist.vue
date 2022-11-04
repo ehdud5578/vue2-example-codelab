@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-0">
+  <v-container class="pa-0">
     <h3>게시글 작성/수정</h3>
     <v-row class="pa-5">
       <v-col cols="12">
@@ -38,7 +38,7 @@
         <v-btn block color="primary">저장</v-btn>
       </v-col>
     </v-row>
-  </v-content>
+  </v-container>
 </template>
 
 <script>

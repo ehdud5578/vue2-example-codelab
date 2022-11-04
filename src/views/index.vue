@@ -1,5 +1,5 @@
 <template>
-  <v-content class="pa-4">
+  <v-container class="pa-4">
     <v-row dense>
       <v-col v-for="(item, i) in items" :key="i" cols="12">
         <v-card :color="$vuetify.theme.defaults.light.secondary" dark>
@@ -20,7 +20,7 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-fab-transition>
-  </v-content>
+  </v-container>
 </template>
 
 <script>
