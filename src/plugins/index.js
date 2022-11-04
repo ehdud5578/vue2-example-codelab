@@ -5,5 +5,5 @@ import ModalPlugin from './modal';
 import './modal/style.css';
 
 Vue.use(Fragment.Plugin);
-Vue.use(ModalPlugin, { useSweet: true });
+Vue.use(ModalPlugin, { useSweet: false });
 Vue.use(AppPlugin);

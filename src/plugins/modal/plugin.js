@@ -1,5 +1,6 @@
 import Alert from './components/VAlert.vue';
 import Confirm from './components/VConfirm.vue';
+import vuetify from '@/plugins/vuetify';
 
 export const createDivInBody = () => {
   const div = document.createElement('div');
@@ -16,14 +17,22 @@ function install(Vue, option) {
   function alert(content) {
     return new Promise((resolve) => {
       const div = createDivInBody();
-      const vm = new Vue(Alert);
-      vm.content = content;
-      vm.onAction = function (action) {
-        resolve(action);
-        vm.$el.remove();
-        vm.$destroy();
-      };
-      vm.$mount(div);
+      const vm = new Vue({
+        el: div,
+        vuetify,
+        render: (h) =>
+          h({
+            ...Alert,
+            created() {
+              this.content = content;
+              this.onAction = function (action) {
+                resolve(action);
+                vm.$el.remove();
+                vm.$destroy();
+              };
+            },
+          }),
+      });
     });
   }
 
@@ -35,14 +44,22 @@ function install(Vue, option) {
   function confirm(content) {
     return new Promise((resolve) => {
       const div = createDivInBody();
-      const vm = new Vue(Confirm);
-      vm.content = content;
-      vm.onAction = function (action) {
-        resolve(action);
-        vm.$el.remove();
-        vm.$destroy();
-      };
-      vm.$mount(div);
+      const vm = new Vue({
+        el: div,
+        vuetify,
+        render: (h) =>
+          h({
+            ...Confirm,
+            created() {
+              this.content = content;
+              this.onAction = function (action) {
+                resolve(action);
+                vm.$el.remove();
+                vm.$destroy();
+              };
+            },
+          }),
+      });
     });
   }
 
