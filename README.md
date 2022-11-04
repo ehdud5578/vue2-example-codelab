@@ -84,3 +84,29 @@ export default new Vuetify({
   },
 });
 ```
+
+## vscode-extension-vetur
+
+설치
+
+설치후 > open user setting open
+
+route 태그에 대한 커스텀 블럭 처리..
+
+```json
+{
+  "vetur.grammar.customBlocks": {
+    "docs": "md",
+    "i18n": "json",
+    "route": "json"
+  }
+}
+```
+
+작성 후
+
+Vetur: Generate grammar from `vetur.grammar.customBlocks`
+
+실행
+
+##
