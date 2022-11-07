@@ -6,3 +6,18 @@
  * 예) 서버와 클라이언트간 특정 알고리즘을 통한 암복호화 함수
  * 예) 외부 서비스 연동을 위한 함수
  */
+
+import PullToRefresh from 'pulltorefreshjs';
+
+export function bindPullToRefresh(el = 'body', callback = () => {}) {
+  PullToRefresh.init({
+    mainElement: el,
+    onRefresh(done) {
+      callback(done);
+    },
+  });
+}
+
+export function unBindPullToRefresh() {
+  PullToRefresh.destroyAll();
+}

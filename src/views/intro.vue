@@ -5,8 +5,9 @@
 </template>
 
 <script>
+import { ENUM_LAYOUT } from '@/common/constants';
 export default {
-  layout: 'simple',
+  layout: ENUM_LAYOUT.SIMPLE,
 };
 </script>
 

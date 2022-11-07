@@ -1,7 +1,13 @@
 <template>
   <span>
     <label :for="id">{{ label }}</label>
-    <textarea v-if="type === 'textarea'" ref="input" v-on="getListeners" v-bind="getInputProps" @input="handleInput" />
+    <textarea
+      v-if="type === 'textarea'"
+      ref="input"
+      v-on="getListeners"
+      v-bind="getInputProps"
+      @input="handleInput"
+    />
     <input v-else ref="input" v-on="getListeners" v-bind="getInputProps" @input="handleInput" />
   </span>
 </template>

@@ -14,6 +14,7 @@ export default new Vuetify({
         primary: colors.purple.accent3,
         secondary: colors.purple.accent1,
         accent: colors.purple.accent4,
+        error: colors.black,
       },
     },
   },

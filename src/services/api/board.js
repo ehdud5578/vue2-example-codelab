@@ -2,7 +2,7 @@ import BaseApiService from './core';
 
 class BoardService extends BaseApiService {
   constructor() {
-    super('/board');
+    super('/boards');
   }
 }
 

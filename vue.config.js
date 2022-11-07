@@ -6,7 +6,9 @@ const publicPath = BASE_URL || '/';
 const outputDir = OUTPUT_DIR || 'dist';
 const assetsDir = ASSETS_DIR || '';
 const proxyServer = PROXY || '';
-const base64Limit = isNaN(process.env.BASE64_SIZE_LIMIT) ? 4096 : Number(process.env.BASE64_SIZE_LIMIT);
+const base64Limit = isNaN(process.env.BASE64_SIZE_LIMIT)
+  ? 4096
+  : Number(process.env.BASE64_SIZE_LIMIT);
 const devtool = process.env.DEVTOOL || 'eval-source-map';
 
 const { defineConfig } = require('@vue/cli-service');

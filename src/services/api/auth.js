@@ -7,11 +7,18 @@ class AuthService extends BaseApiService {
   regist(name, email, password) {
     return this.post('/register', { name, email, password });
   }
+  /**
+   * login
+   * @param {string} email
+   * @param {string} password
+   * @returns {Promise}
+   *
+   */
   login(email, password) {
     return this.post('/login', { email, password });
   }
-  logout() {
-    return this.post('/logout');
+  logout(refreshToken) {
+    return this.post('/logout', { refreshToken });
   }
   refreshToken(refreshToken) {
     return this.post('/refresh-tokens', { refreshToken });
@@ -27,6 +34,9 @@ class AuthService extends BaseApiService {
   }
   sessionLogout() {
     return this.post('/logout');
+  }
+  getSession() {
+    return this.get('/session');
   }
 }
 

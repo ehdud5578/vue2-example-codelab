@@ -1,26 +1,37 @@
 <template>
   <v-container class="pa-4">
-    <v-sheet>
-      <v-row dense>
-        <v-col cols="3" class="font-weight-medium">제목</v-col>
-        <v-col cols="9">제목 들어갑니다.</v-col>
-        <v-col cols="3" class="font-weight-medium">작성자</v-col>
-        <v-col cols="9">작성자가 들어갑니다.</v-col>
-        <v-col cols="3" class="font-weight-medium">작성일</v-col>
-        <v-col cols="9">2022-11-03</v-col>
-        <v-col cols="12">
-          <v-img src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"></v-img>
-        </v-col>
-        <v-col cols="12">
-          <pre class="text-body-1" v-text="'hello world'" />
-        </v-col>
-      </v-row>
-    </v-sheet>
+    <app-board-detail />
   </v-container>
 </template>
 
 <script>
-export default {};
+import AppBoardDetail from '@/modules/board/AppBoardDetail.vue';
+import { ACTIONS, VIEW_NAVI } from '@/common/constants';
+import { mapActions } from 'vuex';
+export default {
+  components: { AppBoardDetail },
+  beforeRouteEnter(to, from, next) {
+    if (!to.params.id) {
+      next({ name: VIEW_NAVI.HOME });
+      return;
+    }
+    next();
+  },
+  async created() {
+    try {
+      await this.fetchInfo(this.$route.params.id);
+    } catch (error) {
+      console.error(error);
+      await this.$alert('게시글을 찾지 못했습니다.');
+      this.$router.go(-1);
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchInfo: ACTIONS.BOARD.DETAIL,
+    }),
+  },
+};
 </script>
 
 <style></style>
