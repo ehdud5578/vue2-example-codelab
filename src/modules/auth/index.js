@@ -75,7 +75,7 @@ export default {
       return _cloneDeep(session);
     },
     [GETTERS.AUTH.IS_ANONYMOUS]({ token }) {
-      return !!token.access;
+      return !token.access;
     },
   },
 };
