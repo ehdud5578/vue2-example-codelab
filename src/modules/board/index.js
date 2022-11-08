@@ -1,5 +1,4 @@
 import _cloneDeep from 'lodash/cloneDeep';
-import _concat from 'lodash/concat';
 import _merge from 'lodash/merge';
 import { MUTATIONS, ACTIONS, GETTERS } from '@/common/constants';
 import { boardService } from '@/services/api';
@@ -27,7 +26,7 @@ export default {
   },
   mutations: {
     [MUTATIONS.BOARD.APPEND](state, payload = []) {
-      state.boards = _concat(state.boards, payload);
+      state.boards = [...state.boards, ...payload];
     },
     [MUTATIONS.BOARD.SET](state, payload = []) {
       state.boards = payload;
@@ -46,6 +45,8 @@ export default {
       return data;
     },
     async [ACTIONS.BOARD.DETAIL](context, payload) {
+      // 상세 정보에 대한 정보를 초기화
+      context.commit(MUTATIONS.BOARD.DETAIL, INIT_DETAIL_DATA());
       const data = await boardService.get(`/${payload}`);
       context.commit(MUTATIONS.BOARD.DETAIL, data);
       return data;
