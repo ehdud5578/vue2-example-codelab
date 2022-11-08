@@ -68,6 +68,8 @@ export const VIEW_NAVI = {
   HOME: 'home',
   BOARD_DETAIL: 'board-id',
   BOARD_REGIST: 'board-regist',
+  USER_REGIST: 'regist',
+  USER_PROFILE: 'profile',
 };
 
 /**

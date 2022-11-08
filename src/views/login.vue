@@ -39,7 +39,7 @@
         <v-btn block :disabled="invalid" color="primary" @click="onSubmit">로그인</v-btn>
       </v-col>
       <v-col cols="12">
-        <v-btn block color="white">회원가입</v-btn>
+        <v-btn block color="white" @click="registUser">회원가입</v-btn>
       </v-col>
     </validation-observer>
   </v-row>
@@ -74,6 +74,9 @@ export default {
       }
 
       this.$router.replace({ name: VIEW_NAVI.HOME });
+    },
+    registUser() {
+      this.$router.push({ name: VIEW_NAVI.USER_REGIST });
     },
   },
 };
