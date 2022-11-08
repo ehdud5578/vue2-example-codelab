@@ -18,6 +18,9 @@ export const MUTATIONS = {
     INIT: 'board/init',
     DETAIL: 'board/detail',
   },
+  TODO: {
+    LIST: 'todos/list',
+  },
 };
 /**
  * Store Actions Keys
@@ -33,6 +36,12 @@ export const ACTIONS = {
     APPEND: 'board/append',
     DETAIL: 'board/detail',
   },
+  TODO: {
+    LIST: 'todos/list',
+    DELETE: 'todos/delete',
+    DONE: 'todos/done',
+    REGIST: 'todos/regist',
+  },
 };
 /**
  * Store Getters Keys
@@ -46,6 +55,9 @@ export const GETTERS = {
   BOARD: {
     LIST: 'board/list',
     DETAIL: 'board/detail',
+  },
+  TODO: {
+    LIST: 'todo/list',
   },
 };
 
