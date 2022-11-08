@@ -14,17 +14,27 @@
         <pre class="text-body-1" v-text="info.content" />
       </v-col>
     </v-row>
+    <v-fab-transition v-if="info.writeable">
+      <v-btn color="primary" dark fixed bottom right fab @click="editBoard">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-sheet>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { GETTERS } from '@/common/constants';
+import { GETTERS, VIEW_NAVI } from '@/common/constants';
 export default {
   computed: {
     ...mapGetters({
       info: [GETTERS.BOARD.DETAIL],
     }),
+  },
+  methods: {
+    editBoard() {
+      this.$router.push({ name: VIEW_NAVI.BOARD_REGIST, query: { id: this.info.id } });
+    },
   },
 };
 </script>

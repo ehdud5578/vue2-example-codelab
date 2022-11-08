@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-0">
     <h3>게시글 작성/수정</h3>
-    <app-board-regist />
+    <app-board-regist :id="$route.query.id" />
   </v-container>
 </template>
 

@@ -2,7 +2,7 @@
   <v-container class="pa-4">
     <app-board-list />
     <v-fab-transition v-if="!isAnonymous">
-      <v-btn color="primary" dark fixed bottom right fab>
+      <v-btn color="primary" dark fixed bottom right fab @click="registBoard">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -18,11 +18,10 @@
 </route>
 <script>
 import { mapGetters } from 'vuex';
-import { GETTERS } from '@/common/constants';
+import { GETTERS, VIEW_NAVI } from '@/common/constants';
 import AppBoardList from '@/modules/board/AppBoardList.vue';
 export default {
   components: { AppBoardList },
-  name: 'home',
   computed: {
     ...mapGetters({
       isAnonymous: GETTERS.AUTH.IS_ANONYMOUS,
@@ -30,6 +29,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    registBoard() {
+      this.$router.push({ name: VIEW_NAVI.BOARD_REGIST });
+    },
   },
 };
 </script>

@@ -3,6 +3,7 @@ import _concat from 'lodash/concat';
 import _merge from 'lodash/merge';
 import { MUTATIONS, ACTIONS, GETTERS } from '@/common/constants';
 import { boardService } from '@/services/api';
+import { API_URL } from '@/common/config';
 
 const INIT_DETAIL_DATA = () => ({
   id: 0,
@@ -52,7 +53,10 @@ export default {
   },
   getters: {
     [GETTERS.BOARD.LIST]({ boards }) {
-      return boards.map((item) => item);
+      return boards.map((item) => {
+        item.thumnail_url = `${API_URL}${item.thumnail}`;
+        return item;
+      });
     },
     [GETTERS.BOARD.DETAIL](state) {
       return _cloneDeep(state.boardDetail);

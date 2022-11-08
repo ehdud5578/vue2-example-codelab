@@ -67,6 +67,7 @@ export const VIEW_NAVI = {
   LOGIN: 'login',
   HOME: 'home',
   BOARD_DETAIL: 'board-id',
+  BOARD_REGIST: 'board-regist',
 };
 
 /**

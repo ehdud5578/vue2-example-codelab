@@ -8,7 +8,7 @@
             <v-card-subtitle v-text="item.writer.name"></v-card-subtitle>
           </div>
           <v-avatar v-if="item.thumnail" class="ma-3" size="125" tile>
-            <v-img :src="item.thumnail"></v-img>
+            <v-img :src="item.thumnail_url"></v-img>
           </v-avatar>
         </div>
       </v-card>
@@ -71,7 +71,7 @@ export default {
       if (!this.state.end && isIntersecting) {
         this.params.page = this.params.page + 1;
         const res = await this.appendList(this.params);
-        this.state.end = res.contents.length === 0;
+        this.state.end = res.contents.length < this.params.size;
       }
     },
   },
