@@ -13,11 +13,12 @@ const getAccessToken = async () => {
   try {
     const { refresh: refreshToken } = store.getters[GETTERS.AUTH.TOKENS];
     const tokens = await authService.refreshToken(refreshToken);
+
     store.commit(MUTATIONS.AUTH.TOKEN, {
       access: tokens.access.token,
       refresh: tokens.refresh.token,
     });
-    return tokens;
+    return tokens.access.token;
   } catch (error) {
     store.commit(MUTATIONS.AUTH.TOKEN, { access: '', refresh: '' });
   }
@@ -52,7 +53,7 @@ instance.interceptors.response.use(
 
     return response.data;
   },
-  async function (error) {
+  function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
     if (!(error instanceof AxiosError)) {
@@ -69,12 +70,26 @@ instance.interceptors.response.use(
 
     if (status === STATUS_CODE.UNAUTHORIZED) {
       // 액세스 토큰 만료시 또는 세션 만료시..
-      const accessToken = await getAccessToken();
-      if (accessToken) {
-        config.sent = true;
-        config.headers.Authorization = `Bearer ${accessToken}`;
-        return instance(config);
-      }
+      return new Promise((resolve, reject) => {
+        getAccessToken()
+          .then((accessToken) => {
+            config.sent = true;
+
+            /**
+             * axios bug report
+             * https://github.com/axios/axios/issues/5187#issue-1423776361
+             * 자세한 내용
+             */
+            config.headers = {
+              ...config.headers,
+            };
+            return instance(config);
+          })
+          .then((result) => resolve(result))
+          .catch((err) => {
+            reject(config);
+          });
+      });
     }
     return Promise.reject(config);
   }
