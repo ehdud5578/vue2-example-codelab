@@ -35,7 +35,7 @@
       <v-col cols="12">
         <app-file-upload-btn v-model="state.thumnail" />
         <br />
-        <v-btn block color="gray" :disabled="invalid" @click="state.thumnail = ''"
+        <v-btn block color="gray" :disabled="!state.thumnail" @click="state.thumnail = ''"
           >썸네일 초기화</v-btn
         >
       </v-col>
