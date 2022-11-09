@@ -60,7 +60,6 @@
 
 <script>
 import _cloneDeep from 'lodash/cloneDeep';
-import _merge from 'lodash/merge';
 import { authService, userService } from '@/services/api';
 import { ACTIONS, VIEW_NAVI } from '@/common/constants';
 import { mapActions } from 'vuex';
@@ -102,12 +101,11 @@ export default {
       fetchSession: ACTIONS.AUTH.SESSION,
     }),
     async onSubmit() {
-      let result;
       const { name, email, password } = _cloneDeep(this.state);
       if (this.profile) {
-        result = await userService.patch(`/${this.info.id}`, { name, email, password });
+        await userService.patch(`/${this.info.id}`, { name, email, password });
       } else {
-        result = await authService.regist(name, email, password);
+        await authService.regist(name, email, password);
       }
       await this.$alert('저장되었습니다.');
       if (!this.profile) this.$router.replace({ name: VIEW_NAVI.LOGIN });

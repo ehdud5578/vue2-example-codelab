@@ -30,9 +30,10 @@ export default {
     onClick() {
       this.$refs.fileInput.click();
     },
-    async onChange(e, values) {
+    async onChange(e) {
       const file = e.target.files[0];
       if (file) {
+        // eslint-disable-next-line no-unused-vars
         const { path, fullpath } = await fileService.upload(file);
         this.$emit('input', path);
       } else {

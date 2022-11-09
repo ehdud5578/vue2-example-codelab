@@ -72,9 +72,8 @@ instance.interceptors.response.use(
       // 액세스 토큰 만료시 또는 세션 만료시..
       return new Promise((resolve, reject) => {
         getAccessToken()
-          .then((accessToken) => {
+          .then(() => {
             config.sent = true;
-
             /**
              * axios bug report
              * https://github.com/axios/axios/issues/5187#issue-1423776361
@@ -87,6 +86,7 @@ instance.interceptors.response.use(
           })
           .then((result) => resolve(result))
           .catch((err) => {
+            console.warn(err);
             reject(config);
           });
       });

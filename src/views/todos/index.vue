@@ -26,7 +26,6 @@ import TodoCard from '@/modules/todo/TodoCard.vue';
 import TodoCardRegist from '@/modules/todo/TodoCardRegist.vue';
 import { mapActions, mapGetters } from 'vuex';
 import { ACTIONS, GETTERS } from '@/common/constants';
-import { todoService } from '@/services/api';
 export default {
   components: {
     TodoCard,
