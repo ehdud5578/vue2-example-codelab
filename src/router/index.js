@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import routes from 'vue-auto-routing';
+import defaultMiddleware from '@/middlewares/default';
 import { createRouterLayout } from 'vue-router-layout';
 
 /**
@@ -26,7 +27,7 @@ const RouterLayout = createRouterLayout((layout) => {
   return import('@/layouts/' + layout + '.vue');
 });
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -37,3 +38,8 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  defaultMiddleware(to, from, next);
+});
+export default router;
