@@ -33,7 +33,7 @@
         </validation-provider>
       </v-col>
       <v-col cols="12">
-        <v-checkbox label="자동로그인" color="black"></v-checkbox>
+        <v-checkbox label="자동로그인" v-model="handleSave" color="black"></v-checkbox>
       </v-col>
       <v-col cols="12">
         <v-btn block :disabled="invalid" color="primary" @click="onSubmit">로그인</v-btn>
@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import _cloneDeep from 'lodash/cloneDeep';
-import { ACTIONS, ENUM_LAYOUT, VIEW_NAVI } from '@/common/constants';
+import { ACTIONS, ENUM_LAYOUT, GETTERS, MUTATIONS, VIEW_NAVI } from '@/common/constants';
 
 const INIT_STATE = () => ({
   email: '',
@@ -62,17 +62,32 @@ export default {
       state: INIT_STATE(),
     };
   },
+  created() {
+    this.state.save = this.isSave;
+  },
+  computed: {
+    ...mapGetters({
+      isSave: GETTERS.AUTH.IS_SAVE,
+    }),
+    handleSave: {
+      get() {
+        return this.isSave;
+      },
+      set(value) {
+        this.changeIsSave(value);
+      },
+    },
+  },
   methods: {
+    ...mapMutations({ changeIsSave: MUTATIONS.AUTH.IS_SAVE }),
     ...mapActions({ login: ACTIONS.AUTH.LOGIN }),
     async onSubmit() {
       const params = _cloneDeep(this.state);
       try {
         await this.login(params);
       } catch (err) {
-        debugger;
         console.error(err);
       }
-
       this.$router.replace({ name: VIEW_NAVI.HOME });
     },
     registUser() {

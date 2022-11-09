@@ -10,6 +10,8 @@
 export const MUTATIONS = {
   AUTH: {
     TOKEN: 'auth/token',
+    CLEAR_TOKEN: 'auth/clearToken',
+    IS_SAVE: 'auth/isSave',
     SESSION: 'auth/session',
   },
   BOARD: {
@@ -51,6 +53,7 @@ export const GETTERS = {
     TOKENS: 'auth/token',
     IS_ANONYMOUS: 'auth/isAnonymous',
     SESSION: 'auth/session',
+    IS_SAVE: 'auth/isSave',
   },
   BOARD: {
     LIST: 'board/list',
@@ -91,6 +94,7 @@ export const VIEW_NAVI = {
 export const STORAGE_KEYS = {
   ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken',
+  IS_SAVE: 'saveAuth',
 };
 
 export const STATUS_CODE = {

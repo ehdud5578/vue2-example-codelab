@@ -1,7 +1,7 @@
 import _cloneDeep from 'lodash/cloneDeep';
 import { authService } from '@/services/api';
 import { ACTIONS, GETTERS, MUTATIONS, STORAGE_KEYS } from '@/common/constants';
-import storage from '@/utils/storage';
+import { storage, session } from '@/utils/storage';
 
 const INIT_TOKEN_DATA = () => ({
   access: '',
@@ -9,8 +9,8 @@ const INIT_TOKEN_DATA = () => ({
 });
 
 const STORAGE_TOKEN_DATA = () => ({
-  access: storage(STORAGE_KEYS.ACCESS_TOKEN) || '',
-  refresh: storage(STORAGE_KEYS.REFRESH_TOKEN) || '',
+  access: storage(STORAGE_KEYS.ACCESS_TOKEN) || session(STORAGE_KEYS.ACCESS_TOKEN) || '',
+  refresh: storage(STORAGE_KEYS.REFRESH_TOKEN) || session(STORAGE_KEYS.REFRESH_TOKEN) || '',
 });
 
 const INIT_SESSION_DATA = () => ({
@@ -24,13 +24,30 @@ export default {
   state: {
     token: STORAGE_TOKEN_DATA(),
     session: INIT_SESSION_DATA(),
+    isSave: storage(STORAGE_KEYS.IS_SAVE) === 'true',
   },
   mutations: {
-    [MUTATIONS.AUTH.TOKEN]({ token }, { access, refresh }) {
+    [MUTATIONS.AUTH.TOKEN]({ token, isSave }, { access, refresh }) {
       token.access = access;
       token.refresh = refresh;
-      storage(STORAGE_KEYS.ACCESS_TOKEN, access);
-      storage(STORAGE_KEYS.REFRESH_TOKEN, refresh);
+      this.commit(MUTATIONS.AUTH.CLEAR_TOKEN);
+      if (isSave) {
+        storage(STORAGE_KEYS.ACCESS_TOKEN, access);
+        storage(STORAGE_KEYS.REFRESH_TOKEN, refresh);
+      } else {
+        session(STORAGE_KEYS.ACCESS_TOKEN, access);
+        session(STORAGE_KEYS.REFRESH_TOKEN, refresh);
+      }
+    },
+    [MUTATIONS.AUTH.IS_SAVE](state, payload) {
+      storage(STORAGE_KEYS.IS_SAVE, payload === true ? 'true' : '');
+      state.isSave = payload;
+    },
+    [MUTATIONS.AUTH.CLEAR_TOKEN]() {
+      session(STORAGE_KEYS.ACCESS_TOKEN, '');
+      session(STORAGE_KEYS.REFRESH_TOKEN, '');
+      storage(STORAGE_KEYS.ACCESS_TOKEN, '');
+      storage(STORAGE_KEYS.REFRESH_TOKEN, '');
     },
     [MUTATIONS.AUTH.SESSION]({ session }, { id, email, name, regDate }) {
       session.id = id;
@@ -52,6 +69,7 @@ export default {
       await authService.logout(this.state.auth.token.refresh);
       context.commit(MUTATIONS.AUTH.SESSION, INIT_SESSION_DATA());
       context.commit(MUTATIONS.AUTH.TOKEN, INIT_TOKEN_DATA());
+      context.commit(MUTATIONS.AUTH.CLEAR_TOKEN);
     },
     async [ACTIONS.AUTH.SESSION](context) {
       const session = await authService.getSession();
@@ -76,6 +94,9 @@ export default {
     },
     [GETTERS.AUTH.IS_ANONYMOUS]({ token }) {
       return !token.access;
+    },
+    [GETTERS.AUTH.IS_SAVE]({ isSave }) {
+      return isSave;
     },
   },
 };
