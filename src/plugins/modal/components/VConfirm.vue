@@ -3,7 +3,7 @@
     <v-card>
       <v-toolbar color="primary" dark>알림</v-toolbar>
       <v-card-text>
-        <div class="text-body2 pa-12" v-text="content"></div>
+        <div class="text-body2 pa-12" v-html="content"></div>
       </v-card-text>
       <v-card-actions class="justify-end">
         <v-btn text @click="_onAction('cancel')">취소</v-btn>
