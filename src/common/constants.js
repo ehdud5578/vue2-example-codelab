@@ -78,6 +78,7 @@ export const VIEW_NAVI = {
   INTRO: 'intro',
   LOGIN: 'login',
   HOME: 'home',
+  TODOS: 'todos',
   BOARD_DETAIL: 'board-id',
   BOARD_REGIST: 'board-regist',
   USER_REGIST: 'regist',
